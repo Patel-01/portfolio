@@ -13,6 +13,12 @@ export function ParticleCanvas() {
     const VIOLET = '110,85,255'
     const MINT = '66,245,200'
 
+    // Throttle to ~30fps on mobile/touch, 60fps on desktop
+    const isMobile = window.matchMedia('(pointer: coarse)').matches
+    const frameInterval = isMobile ? 1000 / 30 : 0
+    let lastTime = 0
+    let isVisible = true
+
     type P = { x: number; y: number; vx: number; vy: number; r: number; c: string }
     let particles: P[] = []
 
@@ -31,7 +37,15 @@ export function ParticleCanvas() {
         c: Math.random() > 0.5 ? VIOLET : MINT,
       }))
     }
-    const draw = () => {
+
+    const draw = (now: number) => {
+      if (!isVisible || document.hidden) return
+      if (frameInterval > 0 && now - lastTime < frameInterval) {
+        animId = requestAnimationFrame(draw)
+        return
+      }
+      lastTime = now
+
       ctx.clearRect(0, 0, w, h)
       particles.forEach(p => {
         p.x += p.vx; p.y += p.vy
@@ -59,10 +73,47 @@ export function ParticleCanvas() {
       }
       animId = requestAnimationFrame(draw)
     }
-    init(); draw()
+
+    const startLoop = () => { animId = requestAnimationFrame(draw) }
+    const stopLoop = () => cancelAnimationFrame(animId)
+
+    // Pause when canvas scrolls off-screen
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          isVisible = true
+          startLoop()
+        } else if (!entry.isIntersecting && isVisible) {
+          isVisible = false
+          stopLoop()
+        }
+      },
+      { threshold: 0 }
+    )
+    io.observe(canvas)
+
+    // Pause when tab is hidden
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop()
+      } else if (isVisible) {
+        startLoop()
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+
+    init()
+    startLoop()
+
     const ro = new ResizeObserver(resize)
     ro.observe(canvas)
-    return () => { cancelAnimationFrame(animId); ro.disconnect() }
+
+    return () => {
+      stopLoop()
+      ro.disconnect()
+      io.disconnect()
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+    }
   }, [])
 
   return (

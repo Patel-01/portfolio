@@ -29,7 +29,6 @@ export function Hero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0])
   const heroY = useTransform(scrollYProgress, [0, 0.65], [0, -50])
 
-  // Mouse parallax for portrait
   const rawX = useMotionValue(0)
   const rawY = useMotionValue(0)
   const springX = useSpring(rawX, { damping: 28, stiffness: 140 })
@@ -49,12 +48,13 @@ export function Hero() {
 
   return (
     <section
+      id="top"
       ref={sectionRef}
       className="relative min-h-screen flex items-center overflow-x-hidden"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Ambient glows — contained */}
+      {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
           className="absolute top-1/4 -left-32 w-[560px] h-[560px] rounded-full"
@@ -72,10 +72,8 @@ export function Hero() {
         />
       </div>
 
-      {/* Particle canvas */}
       <ParticleCanvas />
 
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
@@ -85,15 +83,14 @@ export function Hero() {
         }}
       />
 
-      {/* Scroll-driven content wrapper */}
+      {/* Main content */}
       <motion.div
         style={{ opacity: heroOpacity, y: heroY }}
         className="relative w-full max-w-6xl mx-auto px-6 pt-24 pb-16"
       >
         <div className="grid lg:grid-cols-[1fr_420px] gap-12 items-center">
-          {/* ── LEFT: Text ── */}
+          {/* LEFT: Text */}
           <motion.div variants={stagger} initial="hidden" animate="show">
-            {/* Status badge */}
             <motion.div variants={fadeUp} className="mb-6">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border border-violet/30 bg-violet/10 text-violet">
                 <span
@@ -104,24 +101,24 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Mobile-only avatar — shown instead of the right-col portrait */}
+            {/* Mobile-only avatar */}
             <motion.div variants={fadeUp} className="lg:hidden mb-6">
               <img
                 src={`${import.meta.env.BASE_URL}images/portrait.png`}
                 alt="Pankaj Kumar Verma"
+                width={96}
+                height={96}
                 className="w-24 h-24 rounded-full object-cover object-top border-2 border-violet/30"
                 loading="eager"
               />
             </motion.div>
 
-            {/* Name */}
             <motion.div variants={fadeUp} className="mb-2">
               <span className="text-fg-muted text-xl sm:text-2xl font-semibold tracking-tight">
                 Pankaj Kumar Verma
               </span>
             </motion.div>
 
-            {/* Headline — specific, not generic */}
             <motion.h1
               variants={fadeUp}
               className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6"
@@ -130,7 +127,6 @@ export function Hero() {
               <span className="text-fg block">mobile products.</span>
             </motion.h1>
 
-            {/* Bio */}
             <motion.p
               variants={fadeUp}
               className="text-base text-fg-muted leading-relaxed max-w-lg mb-8"
@@ -138,7 +134,6 @@ export function Hero() {
               {resume.bio}
             </motion.p>
 
-            {/* CTAs */}
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-8">
               <a
                 href="#projects"
@@ -170,7 +165,6 @@ export function Hero() {
               )}
             </motion.div>
 
-            {/* Social row — location hidden on mobile to avoid cramping */}
             <motion.div variants={fadeUp} className="flex items-center gap-1">
               <a
                 href={resume.github}
@@ -198,18 +192,14 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* ── RIGHT: Portrait (desktop only) ── */}
+          {/* RIGHT: Portrait (desktop only) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="hidden lg:flex justify-center"
           >
-            <motion.div
-              style={{ x: portraitX, y: portraitY }}
-              className="relative"
-            >
-              {/* Glow behind portrait */}
+            <motion.div style={{ x: portraitX, y: portraitY }} className="relative">
               <div
                 className="absolute -inset-8 rounded-3xl"
                 style={{
@@ -217,8 +207,6 @@ export function Hero() {
                   filter: 'blur(32px)',
                 }}
               />
-
-              {/* Portrait image */}
               <div
                 className="relative overflow-hidden rounded-2xl"
                 style={{
@@ -230,8 +218,11 @@ export function Hero() {
                 <img
                   src={`${import.meta.env.BASE_URL}images/portrait.png`}
                   alt="Pankaj Kumar Verma"
+                  width={360}
+                  height={480}
                   className="w-full h-full object-cover object-top"
                   loading="eager"
+                  fetchPriority="high"
                 />
                 <div
                   className="absolute inset-0 pointer-events-none"
@@ -247,7 +238,6 @@ export function Hero() {
                 />
               </div>
 
-              {/* Floating stat badge */}
               <motion.div
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -261,25 +251,25 @@ export function Hero() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator — hidden on mobile to avoid overlap */}
-        <motion.a
-          href="#stats"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-          className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-fg-muted hover:text-fg transition-colors p-2"
-          aria-label="Scroll down"
-        >
-          <span className="text-xs font-medium tracking-wide">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <ArrowDown size={13} />
-          </motion.div>
-        </motion.a>
       </motion.div>
+
+      {/* Scroll indicator — positioned relative to section (min-h-screen), hidden at short heights */}
+      <motion.a
+        href="#stats"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 0.6 }}
+        className="[@media(max-height:700px)]:hidden hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-fg-muted hover:text-fg transition-colors p-2"
+        aria-label="Scroll down"
+      >
+        <span className="text-xs font-medium tracking-wide">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowDown size={13} />
+        </motion.div>
+      </motion.a>
     </section>
   )
 }

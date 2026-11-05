@@ -20,8 +20,8 @@ export function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-5%' }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12"
         >
           <span className="text-violet text-sm font-semibold mb-3 block">Skills</span>
@@ -30,7 +30,7 @@ export function Skills() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
           {categories.map(([category, skills], i) => {
             const color = categoryColors[category] ?? '#6E55FF'
             return (
@@ -38,8 +38,8 @@ export function Skills() {
                 key={category}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: '-5%' }}
+                transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="glass-card p-5"
               >
                 <div className="flex items-center gap-2 mb-4">
@@ -85,8 +85,8 @@ export function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-5%' }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 glass-card p-5"
         >
           <span className="font-semibold text-sm text-fg mb-4 block">Certifications & Badges</span>

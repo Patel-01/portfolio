@@ -15,6 +15,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [lastY, setLastY] = useState(0)
   const [hidden, setHidden] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>('')
 
   useEffect(() => {
     const onScroll = () => {
@@ -26,6 +27,20 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [lastY])
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]')
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: '-20% 0% -60% 0%', threshold: 0 }
+    )
+    sections.forEach(s => obs.observe(s))
+    return () => obs.disconnect()
+  }, [])
 
   return (
     <motion.header
@@ -39,22 +54,31 @@ export function Nav() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo — min 44px tap target */}
-        <a href="#" className="font-bold text-fg text-sm tracking-tight hover:text-violet transition-colors py-3 -my-3">
+        {/* Logo */}
+        <a href="#top" className="font-bold text-fg text-sm tracking-tight hover:text-violet transition-colors py-3 -my-3">
           <span className="text-violet">//</span> PKV
         </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {links.map(l => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-fg-muted text-sm font-medium hover:text-fg transition-colors py-2"
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map(l => {
+            const isActive = activeSection === l.href.slice(1)
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={isActive ? 'true' : undefined}
+                className={`text-sm font-medium transition-colors py-2 relative ${
+                  isActive ? 'text-fg' : 'text-fg-muted hover:text-fg'
+                }`}
+              >
+                {l.label}
+                {isActive && (
+                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-violet rounded-full" />
+                )}
+              </a>
+            )
+          })}
         </nav>
 
         {/* Right side */}
@@ -96,7 +120,7 @@ export function Nav() {
           </a>
         </div>
 
-        {/* Mobile hamburger — min 44px tap target */}
+        {/* Mobile hamburger */}
         <button
           className="md:hidden text-fg-muted hover:text-fg transition-colors p-2.5 -mr-2.5"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -106,7 +130,7 @@ export function Nav() {
         </button>
       </div>
 
-      {/* Mobile menu — solid bg so hero doesn't bleed through */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -117,16 +141,22 @@ export function Nav() {
             className="md:hidden border-t border-border px-6 py-4 flex flex-col gap-1"
             style={{ background: '#0A0A0F' }}
           >
-            {links.map(l => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-fg-muted text-sm font-medium hover:text-fg transition-colors flex items-center min-h-[44px]"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map(l => {
+              const isActive = activeSection === l.href.slice(1)
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`text-sm font-medium transition-colors flex items-center min-h-[44px] ${
+                    isActive ? 'text-fg' : 'text-fg-muted hover:text-fg'
+                  }`}
+                >
+                  {l.label}
+                </a>
+              )
+            })}
             <div className="flex gap-3 pt-3 mt-1 border-t border-border items-center">
               <a
                 href={resume.github}

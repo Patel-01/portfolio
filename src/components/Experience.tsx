@@ -4,7 +4,6 @@ import { ChevronDown } from 'lucide-react'
 import { resume } from '../data/resume'
 
 export function Experience() {
-  // Expand first two entries (Recco + Better Software) by default
   const [openSet, setOpenSet] = useState<Set<number>>(new Set([0, 1]))
 
   const toggle = (i: number) => {
@@ -21,8 +20,8 @@ export function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-5%' }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="text-violet text-sm font-semibold mb-3 block">Experience</span>
           <h2 className="text-4xl font-bold text-fg mb-12 leading-tight">
@@ -33,24 +32,25 @@ export function Experience() {
         <div className="flex flex-col gap-3">
           {resume.experience.map((exp, i) => {
             const isOpen = openSet.has(i)
+            const bodyId = `exp-body-${i}`
             return (
               <motion.div
                 key={exp.company}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, margin: '-5%' }}
+                transition={{ duration: 0.35, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 className="glass-card overflow-hidden transition-colors duration-200"
                 style={{ borderColor: isOpen ? `${exp.color}30` : undefined }}
               >
-                {/* Header row */}
+                {/* Header row — entire row is the button */}
                 <button
                   className="w-full flex items-start justify-between gap-4 p-5 md:p-6 text-left min-h-[64px]"
                   onClick={() => toggle(i)}
                   aria-expanded={isOpen}
+                  aria-controls={bodyId}
                 >
                   <div className="flex items-start gap-4 min-w-0">
-                    {/* Color dot */}
                     <span
                       className="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1.5"
                       style={{ background: exp.color }}
@@ -66,7 +66,6 @@ export function Experience() {
                         </span>
                       </div>
                       <div className="text-sm text-fg-muted mt-0.5">{exp.role}</div>
-                      {/* Period — always visible including mobile */}
                       <div className="text-xs text-fg-subtle mt-0.5">{exp.period}</div>
                     </div>
                   </div>
@@ -81,10 +80,12 @@ export function Experience() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
+                      id={bodyId}
+                      role="region"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
                       <div className="px-5 md:px-6 pb-6 border-t border-border pt-4">
                         <p className="text-fg-muted text-sm leading-relaxed mb-4">
@@ -117,12 +118,12 @@ export function Experience() {
           })}
         </div>
 
-        {/* Education row */}
+        {/* Education */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: '-5%' }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="mt-12 glass-card p-6"
         >
           <span className="text-xs font-semibold text-fg-muted mb-1 block">Education</span>

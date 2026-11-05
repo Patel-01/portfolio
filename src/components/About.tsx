@@ -29,8 +29,8 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="text-violet text-sm font-semibold mb-3 block tracking-wide">About</span>
             <h2 className="text-4xl font-bold text-fg mb-5 leading-tight">
@@ -47,8 +47,8 @@ export function About() {
                   key={t.title}
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  viewport={{ once: true, margin: '-5%' }}
+                  transition={{ duration: 0.35, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="py-5 group flex gap-5 items-start"
                 >
                   <span className="text-violet text-xs font-mono mt-0.5 w-6 flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
@@ -69,8 +69,8 @@ export function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="hidden lg:block sticky top-28"
           >
             <div

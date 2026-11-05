@@ -8,7 +8,6 @@ export function Cursor() {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
-    // Only show on pointer devices
     if (!window.matchMedia('(pointer: fine)').matches) return
 
     const dot = dotRef.current
@@ -21,7 +20,14 @@ export function Cursor() {
     const onMove = (e: MouseEvent) => {
       posRef.current = { x: e.clientX, y: e.clientY }
     }
-    window.addEventListener('mousemove', onMove, { passive: true })
+    const onDocLeave = () => {
+      dot.style.opacity = '0'
+      ring.style.opacity = '0'
+    }
+    const onDocEnter = () => {
+      dot.style.opacity = '1'
+      ring.style.opacity = '1'
+    }
 
     const onEnterLink = () => ring.classList.add('scaled')
     const onLeaveLink = () => ring.classList.remove('scaled')
@@ -29,6 +35,10 @@ export function Cursor() {
       el.addEventListener('mouseenter', onEnterLink)
       el.addEventListener('mouseleave', onLeaveLink)
     })
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    document.addEventListener('mouseleave', onDocLeave)
+    document.addEventListener('mouseenter', onDocEnter)
 
     const tick = () => {
       dot.style.transform = `translate(${posRef.current.x - 4}px, ${posRef.current.y - 4}px)`
@@ -41,6 +51,8 @@ export function Cursor() {
 
     return () => {
       window.removeEventListener('mousemove', onMove)
+      document.removeEventListener('mouseleave', onDocLeave)
+      document.removeEventListener('mouseenter', onDocEnter)
       cancelAnimationFrame(rafRef.current)
     }
   }, [])
@@ -58,6 +70,7 @@ export function Cursor() {
         style={{ transition: 'opacity 0.3s, width 0.2s, height 0.2s, border-color 0.2s' }}
       />
       <style>{`
+        @media (pointer: fine) { body { cursor: none; } }
         .ring-cursor.scaled {
           width: 50px;
           height: 50px;

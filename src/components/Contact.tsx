@@ -37,7 +37,7 @@ export function Contact() {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, #0A0A0F 0%, rgba(10,10,15,0.65) 35%, rgba(10,10,15,0.65) 65%, #0A0A0F 100%)',
+              'linear-gradient(to bottom, #0A0A0F 0%, rgba(10,10,15,0.88) 25%, rgba(10,10,15,0.88) 75%, #0A0A0F 100%)',
           }}
         />
       </div>
@@ -48,8 +48,8 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="text-center mb-14"
           >
             <span className="text-violet text-sm font-semibold mb-3 block">Contact</span>
@@ -66,8 +66,8 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="flex justify-center mb-12"
           >
             <a
@@ -86,8 +86,8 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: '-5%' }}
+            transition={{ duration: 0.35, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto"
           >
             {links.map(({ icon: Icon, label, value, href }) => (
@@ -104,7 +104,7 @@ export function Contact() {
                 </div>
                 <div className="min-w-0">
                   <div className="text-xs text-fg-muted font-medium">{label}</div>
-                  <div className="text-sm text-fg font-medium truncate">{value}</div>
+                  <div className="text-sm text-fg font-medium break-words">{value}</div>
                 </div>
               </a>
             ))}
