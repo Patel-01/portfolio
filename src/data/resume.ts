@@ -167,7 +167,7 @@ export const resume = {
 
   education: {
     degree: 'Bachelor of Technology in Computer Science & Engineering',
-    institution: 'BBDNITM, Lucknow',
+    institution: 'BBDNIIT, Lucknow',
     period: '2019–2023',
     result: 'First Division with Distinction',
     cgpa: '8.04 / 10',
