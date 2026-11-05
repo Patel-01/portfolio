@@ -26,7 +26,7 @@ export function Contact() {
       <div ref={imgRef} className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: imgY }}>
           <img
-            src="/images/outdoor.png"
+            src={`${import.meta.env.BASE_URL}images/outdoor.png`}
             alt=""
             aria-hidden
             className="w-full h-full object-cover"

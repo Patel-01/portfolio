@@ -85,7 +85,7 @@ export function About() {
               }}
             >
               <img
-                src="/images/portrait.png"
+                src={`${import.meta.env.BASE_URL}images/portrait.png`}
                 alt="Pankaj Kumar Verma"
                 className="w-full object-cover"
                 style={{ aspectRatio: '4/5', objectPosition: 'center top' }}

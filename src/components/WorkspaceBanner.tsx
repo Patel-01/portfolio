@@ -19,7 +19,7 @@ export function WorkspaceBanner() {
         style={{ scale: imgScale, x: imgX }}
       >
         <img
-          src="/images/workspace.png"
+          src={`${import.meta.env.BASE_URL}images/workspace.png`}
           alt="Developer workspace"
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 25%' }}

@@ -59,7 +59,7 @@ export function Hero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'url(/images/code-bg.png)',
+          backgroundImage: `url(${import.meta.env.BASE_URL}images/code-bg.png)`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.045,
@@ -216,7 +216,7 @@ export function Hero() {
                 }}
               >
                 <img
-                  src="/images/portrait.png"
+                  src={`${import.meta.env.BASE_URL}images/portrait.png`}
                   alt="Pankaj Kumar Verma"
                   className="w-full h-full object-cover object-top"
                   loading="eager"
