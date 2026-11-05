@@ -1,14 +1,12 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Mail, Github, Linkedin, Globe, Phone, ArrowRight } from 'lucide-react'
+import { Mail, Github, Linkedin, ArrowRight } from 'lucide-react'
 import { resume } from '../data/resume'
 
 const links = [
   { icon: Mail, label: 'Email', value: resume.email, href: `mailto:${resume.email}` },
-  { icon: Linkedin, label: 'LinkedIn', value: 'pankaj-kumar-verma-428a8a202', href: resume.linkedin },
+  { icon: Linkedin, label: 'LinkedIn', value: 'pankaj-kumar-verma', href: resume.linkedin },
   { icon: Github, label: 'GitHub', value: 'Patel-world', href: resume.github },
-  { icon: Globe, label: 'Portfolio', value: 'patel-world.github.io', href: resume.portfolio },
-  { icon: Phone, label: 'Phone', value: resume.phone, href: `tel:${resume.phone}` },
 ]
 
 export function Contact() {
@@ -90,7 +88,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-3xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto"
           >
             {links.map(({ icon: Icon, label, value, href }) => (
               <a

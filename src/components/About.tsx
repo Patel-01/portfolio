@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
-import { MapPin } from 'lucide-react'
 import { resume } from '../data/resume'
 
 const traits = [
   {
     num: '01',
     title: 'Product-minded engineer',
-    body: "I build for outcomes, not tickets. Whether it's a solo marketplace from scratch or a 6-contribution AI platform, I keep the user in mind.",
+    body: "I build for outcomes, not tickets. Whether it's a full marketplace from scratch or an AI incident-investigation platform, I keep the user in mind.",
   },
   {
     num: '02',
@@ -16,7 +15,7 @@ const traits = [
   {
     num: '03',
     title: 'High throughput',
-    body: '488 merged PRs. 573 reviews. I move fast and review carefully — because shipping slowly and reviewing never are both expensive.',
+    body: 'I move fast without cutting corners — reviewing code carefully and shipping daily. Throughput matters, so does quality.',
   },
 ]
 
@@ -37,13 +36,9 @@ export function About() {
             <h2 className="text-4xl font-bold text-fg mb-5 leading-tight">
               Building software that ships and scales.
             </h2>
-            <p className="text-fg-muted leading-relaxed mb-3">
-              {resume.bio}
+            <p className="text-fg-muted leading-relaxed mb-12">
+              {resume.aboutBio}
             </p>
-            <div className="flex items-center gap-2 text-sm text-fg-muted mb-12">
-              <MapPin size={14} className="text-violet flex-shrink-0" />
-              {resume.location}
-            </div>
 
             {/* Editorial trait list */}
             <div className="flex flex-col divide-y divide-border">
@@ -70,7 +65,7 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* Right: portrait photo */}
+          {/* Right: workspace photo (not portrait — portrait is used in hero) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -85,20 +80,18 @@ export function About() {
               }}
             >
               <img
-                src={`${import.meta.env.BASE_URL}images/portrait.png`}
-                alt="Pankaj Kumar Verma"
+                src={`${import.meta.env.BASE_URL}images/workspace.png`}
+                alt="Pankaj's workspace"
                 className="w-full object-cover"
-                style={{ aspectRatio: '4/5', objectPosition: 'center top' }}
+                style={{ aspectRatio: '4/3', objectPosition: 'center top' }}
                 loading="lazy"
               />
-              {/* Subtle bottom fade */}
               <div
-                className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+                className="absolute inset-x-0 bottom-0 h-28 pointer-events-none"
                 style={{
-                  background: 'linear-gradient(to top, rgba(10,10,15,0.55) 0%, transparent 100%)',
+                  background: 'linear-gradient(to top, rgba(10,10,15,0.6) 0%, transparent 100%)',
                 }}
               />
-              {/* Caption */}
               <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between">
                 <span className="text-white/60 text-xs font-mono">Bengaluru, 2026</span>
                 <span className="text-white/40 text-xs font-mono">@patel-world</span>

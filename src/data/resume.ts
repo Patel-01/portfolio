@@ -1,23 +1,42 @@
 export const resume = {
   name: 'Pankaj Kumar Verma',
   title: 'Full-Stack Engineer',
-  tagline: '488 merged PRs. Ships what others spec.',
-  bio: `4+ years building production software across AI platforms, mobile marketplaces, and cloud infrastructure. I've owned engineering from zero — full-stack API design, React Native, CI/CD, and AI integrations. Currently open to roles where technical depth matters.`,
+  tagline: 'Sole engineer to App Store. 342 PRs. Ships.',
+  // Hero bio — shown in hero section
+  bio: `Full-stack engineer with 5+ years of professional experience. I've owned entire products solo — from zero to live iOS/Android release — and contributed to AI platforms used by engineering teams.`,
+  // About bio — different content, shown in About section
+  aboutBio: `I work best when I own a problem end-to-end. Not just my layer of the stack — the whole thing. I've shipped production apps alone and in teams: marketplace flows, real-time sync, auth systems, CI pipelines, and AI integrations. I'm looking for a product-focused engineering team that values technical depth and fast iteration.`,
   location: 'Bengaluru, India',
   email: 'patel.dp2024@gmail.com',
-  phone: '+91 7985450913',
+  // resumeUrl: set to your PDF link to enable the Resume button in nav + hero
+  resumeUrl: null as string | null,
   github: 'https://github.com/Patel-world',
   linkedin: 'https://www.linkedin.com/in/pankaj-kumar-verma-428a8a202/',
-  portfolio: 'https://patel-world.github.io',
 
   stats: [
     { value: 488, label: 'Merged PRs', suffix: '' },
     { value: 573, label: 'PRs Reviewed', suffix: '' },
     { value: 2958, label: 'Contributions', suffix: '' },
-    { value: 4, label: 'Years', suffix: '+' },
+    { value: 5, label: 'Years exp.', suffix: '+' },
   ],
 
   experience: [
+    {
+      company: 'Hi5Talent (Recco)',
+      role: 'Software Engineer — Sole Engineer',
+      period: 'Dec 2024 – Mar 2026',
+      location: 'Remote',
+      type: 'Marketplace',
+      color: '#42F5C8',
+      summary: 'Built the multi-tenant Recco coach marketplace from zero as the sole engineer. iOS, Android, and web — from an empty repo to App Store and Google Play releases.',
+      bullets: [
+        'Sole engineer: zero to live iOS and Android releases in 15 months',
+        'Built booking engine, Stripe Connect payouts, and AI-powered matching (OpenAI ReAct, Gemini video, semantic search)',
+        'Closed IDOR vulnerabilities across 6 subsystems during security hardening',
+        '342 merged PRs and 362 PR reviews',
+      ],
+      stack: ['React Native', 'Node.js', 'TypeScript', 'Stripe Connect', 'OpenAI', 'Gemini', 'MongoDB', 'Redis'],
+    },
     {
       company: 'Better Software',
       role: 'Software Engineer',
@@ -31,42 +50,8 @@ export const resume = {
         'Built AWS CloudWatch log-provider: IAM-based auth, region/log-group pickers, live log streaming',
         'Implemented PostgreSQL and MySQL read-only data-providers',
         'Shipped AI context-window panel surfacing relevant logs and metrics per incident',
-        '6 contributions merged across the core platform',
       ],
       stack: ['React', 'TypeScript', 'Python', 'Flask', 'Claude Code', 'OAuth', 'AWS'],
-    },
-    {
-      company: 'Hi5Talent (Recco)',
-      role: 'Software Engineer',
-      period: 'Dec 2024 – Mar 2026',
-      location: 'Remote',
-      type: 'Marketplace',
-      color: '#42F5C8',
-      summary: 'Sole engineer building the multi-tenant Recco coach marketplace from zero. iOS, Android, and web.',
-      bullets: [
-        'Built booking, Stripe Connect payouts, and AI-powered features (OpenAI ReAct, Gemini video, semantic search)',
-        'Closed IDOR vulnerabilities across 6 subsystems during security hardening',
-        'Owned iOS and Android releases end-to-end',
-        'Authored 342 merged PRs and 362 PR reviews in 15 months',
-      ],
-      stack: ['React Native', 'Node.js', 'TypeScript', 'Stripe Connect', 'OpenAI', 'Gemini', 'MongoDB', 'Redis'],
-    },
-    {
-      company: 'Sunny Energy',
-      role: 'Software Engineer',
-      period: 'Jan 2026 – Mar 2026',
-      location: 'Remote',
-      type: 'Solar',
-      color: '#FBBF24',
-      summary: 'Short engagement on My Solar RX — energy monitoring and solar management platform.',
-      bullets: [
-        'Built Redis-cached energy data sync worker with configurable intervals',
-        'Implemented REST endpoints for site and device data',
-        'Upgraded React Native New Architecture (from Legacy arch)',
-        'Integrated push + email notification delivery',
-        '16 PRs merged in 3 weeks',
-      ],
-      stack: ['Python', 'TypeScript', 'React Native', 'Redis', 'React 19', 'BullMQ'],
     },
     {
       company: 'Artica',
@@ -83,20 +68,25 @@ export const resume = {
       ],
       stack: ['React Native', 'TypeScript', 'Expo'],
     },
+    {
+      company: 'Sunny Energy',
+      role: 'Software Engineer',
+      period: 'Jan 2026 – Mar 2026',
+      location: 'Remote',
+      type: 'Contract',
+      color: '#FBBF24',
+      summary: 'Short contract on My Solar RX — energy monitoring and solar management platform.',
+      bullets: [
+        'Built Redis-cached energy data sync worker with configurable intervals',
+        'Implemented REST endpoints for site and device data',
+        'Upgraded React Native to New Architecture (from Legacy)',
+        '16 PRs merged in 3 weeks',
+      ],
+      stack: ['Python', 'TypeScript', 'React Native', 'Redis', 'React 19', 'BullMQ'],
+    },
   ],
 
   projects: [
-    {
-      title: 'Operate',
-      subtitle: 'AI incident-investigation platform',
-      type: 'AI',
-      color: '#6E55FF',
-      description: 'Claude Code-enabled platform for engineering teams to investigate incidents using AI context from logs, metrics, and runbooks.',
-      contribution: 'Delivered Slack Settings UI, CloudWatch log-provider, database read-only providers, and AI context panel.',
-      stack: ['React', 'TypeScript', 'Python', 'Flask', 'Claude Code', 'AWS CloudWatch'],
-      link: null,
-      prs: 6,
-    },
     {
       title: 'Recco',
       subtitle: 'Multi-tenant coach marketplace',
@@ -107,6 +97,17 @@ export const resume = {
       stack: ['React Native', 'Node.js', 'Stripe Connect', 'OpenAI', 'Gemini', 'MongoDB'],
       link: null,
       prs: 342,
+    },
+    {
+      title: 'Operate',
+      subtitle: 'AI incident-investigation platform',
+      type: 'AI',
+      color: '#6E55FF',
+      description: 'Claude Code-enabled platform for engineering teams to investigate incidents using AI context from logs, metrics, and runbooks.',
+      contribution: 'Delivered Slack Settings UI, CloudWatch log-provider, database read-only providers, and AI context panel.',
+      stack: ['React', 'TypeScript', 'Python', 'Flask', 'Claude Code', 'AWS CloudWatch'],
+      link: null,
+      prs: null,
     },
     {
       title: 'github-ci',
@@ -147,17 +148,17 @@ export const resume = {
       type: 'Mobile',
       color: '#FCD34D',
       description: 'Energy monitoring platform for solar installations. Redis-backed data sync, React Native New Architecture, push notifications.',
-      contribution: '16 PRs in 3-week engagement.',
+      contribution: '16 PRs in 3-week contract engagement.',
       stack: ['Python', 'Redis', 'React Native', 'TypeScript'],
       link: null,
-      prs: 16,
+      prs: null,
     },
   ],
 
   skills: {
     'Frontend': ['React', 'React Native', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Expo', 'Framer Motion'],
     'Backend': ['Node.js', 'Python', 'Flask', 'REST APIs', 'WebSockets', 'BullMQ'],
-    'Data': ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'SQL'],
+    'Data': ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis'],
     'AI / LLMs': ['Claude Code', 'OpenAI API', 'Gemini API', 'RAG', 'Semantic Search'],
     'DevOps': ['Docker', 'GitHub Actions', 'AWS CloudWatch', 'CI/CD', 'Vite'],
     'Payments': ['Stripe Connect', 'Webhooks', 'OAuth 2.0', 'RBAC'],
@@ -173,10 +174,7 @@ export const resume = {
   },
 
   certifications: [
-    'Triplebyte Certified',
     'GitHub Pull Shark ×3',
     'GitHub Pair Extraordinaire ×3',
-    'GitHub Quickdraw',
-    'GitHub YOLO',
   ],
 } as const

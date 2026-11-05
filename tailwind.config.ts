@@ -26,8 +26,8 @@ export default {
         },
         fg: {
           DEFAULT: '#E8E7FF',
-          muted: '#6B6B8A',
-          subtle: '#3E3E5A',
+          muted: '#A1A1B5',
+          subtle: '#6B6B8A',
         },
         border: 'rgba(255,255,255,0.08)',
         glass: 'rgba(255,255,255,0.04)',

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import { Cursor } from './components/Cursor'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
@@ -72,6 +72,7 @@ export default function App() {
   const [loaded, setLoaded] = useState(false)
 
   return (
+    <MotionConfig reducedMotion="user">
     <>
       {/* Film grain overlay */}
       <div
@@ -108,5 +109,6 @@ export default function App() {
         <Footer />
       </motion.div>
     </>
+    </MotionConfig>
   )
 }

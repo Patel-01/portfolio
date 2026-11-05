@@ -30,7 +30,7 @@ export function Skills() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {categories.map(([category, skills], i) => {
             const color = categoryColors[category] ?? '#6E55FF'
             return (

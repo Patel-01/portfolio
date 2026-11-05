@@ -3,6 +3,14 @@ import { motion } from 'framer-motion'
 import { ExternalLink, GitPullRequest } from 'lucide-react'
 import { resume } from '../data/resume'
 
+// Fixed colors per type so the same tag is always the same color
+const typeColors: Record<string, string> = {
+  'AI': '#6E55FF',
+  'Marketplace': '#42F5C8',
+  'Open Source': '#FBBF24',
+  'Mobile': '#F472B6',
+}
+
 function use3DTilt() {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -50,15 +58,20 @@ function ProjectCard({
       >
         {/* Top */}
         <div className="flex items-start justify-between gap-2">
-          <div
-            className="text-xs font-semibold px-2 py-1 rounded-full"
-            style={{ background: `${project.color}18`, color: project.color }}
-          >
-            {project.type}
-          </div>
-          <div className="flex gap-2 items-center">
+          {(() => {
+            const tagColor = typeColors[project.type] ?? '#6E55FF'
+            return (
+              <div
+                className="text-xs font-semibold px-2 py-1 rounded-full"
+                style={{ background: `${tagColor}18`, color: tagColor }}
+              >
+                {project.type}
+              </div>
+            )
+          })()}
+          <div className="flex gap-1 items-center">
             {project.prs !== null && (
-              <span className="flex items-center gap-1 text-xs text-fg-muted">
+              <span className="flex items-center gap-1 text-xs text-fg-muted mr-1">
                 <GitPullRequest size={11} style={{ color: project.color }} />
                 {project.prs}
               </span>
@@ -68,7 +81,7 @@ function ProjectCard({
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-fg transition-colors"
+                className="text-fg-muted hover:text-fg transition-colors p-1.5 -m-1.5"
                 aria-label={`View ${project.title}`}
               >
                 <ExternalLink size={14} />

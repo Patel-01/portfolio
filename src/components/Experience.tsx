@@ -4,7 +4,16 @@ import { ChevronDown } from 'lucide-react'
 import { resume } from '../data/resume'
 
 export function Experience() {
-  const [open, setOpen] = useState<number | null>(0)
+  // Expand first two entries (Recco + Better Software) by default
+  const [openSet, setOpenSet] = useState<Set<number>>(new Set([0, 1]))
+
+  const toggle = (i: number) => {
+    setOpenSet(prev => {
+      const next = new Set(prev)
+      next.has(i) ? next.delete(i) : next.add(i)
+      return next
+    })
+  }
 
   return (
     <section id="experience" className="section bg-bg-2/30">
@@ -23,7 +32,7 @@ export function Experience() {
 
         <div className="flex flex-col gap-3">
           {resume.experience.map((exp, i) => {
-            const isOpen = open === i
+            const isOpen = openSet.has(i)
             return (
               <motion.div
                 key={exp.company}
@@ -31,21 +40,19 @@ export function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className={`glass-card overflow-hidden transition-colors duration-200 ${
-                  isOpen ? 'border-opacity-30' : ''
-                }`}
+                className="glass-card overflow-hidden transition-colors duration-200"
                 style={{ borderColor: isOpen ? `${exp.color}30` : undefined }}
               >
                 {/* Header row */}
                 <button
-                  className="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left"
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-start justify-between gap-4 p-5 md:p-6 text-left min-h-[64px]"
+                  onClick={() => toggle(i)}
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-center gap-4 min-w-0">
+                  <div className="flex items-start gap-4 min-w-0">
                     {/* Color dot */}
                     <span
-                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1.5"
                       style={{ background: exp.color }}
                     />
                     <div className="min-w-0">
@@ -59,16 +66,15 @@ export function Experience() {
                         </span>
                       </div>
                       <div className="text-sm text-fg-muted mt-0.5">{exp.role}</div>
+                      {/* Period — always visible including mobile */}
+                      <div className="text-xs text-fg-subtle mt-0.5">{exp.period}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 flex-shrink-0">
-                    <span className="hidden sm:block text-xs text-fg-subtle">{exp.period}</span>
-                    <ChevronDown
-                      size={16}
-                      className="text-fg-muted transition-transform duration-300"
-                      style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    />
-                  </div>
+                  <ChevronDown
+                    size={16}
+                    className="text-fg-muted transition-transform duration-300 flex-shrink-0 mt-1"
+                    style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
                 </button>
 
                 {/* Expandable body */}
@@ -119,16 +125,12 @@ export function Experience() {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mt-12 glass-card p-6"
         >
-          <div className="flex items-start gap-4">
-            <div>
-              <span className="text-xs font-semibold text-fg-muted mb-1 block">Education</span>
-              <div className="font-bold text-fg">{resume.education.institution}</div>
-              <div className="text-sm text-fg-muted mt-0.5">{resume.education.degree}</div>
-              <div className="flex items-center gap-4 mt-2">
-                <span className="text-xs text-fg-subtle">{resume.education.period}</span>
-                <span className="text-xs font-semibold text-mint">CGPA {resume.education.cgpa}</span>
-              </div>
-            </div>
+          <span className="text-xs font-semibold text-fg-muted mb-1 block">Education</span>
+          <div className="font-bold text-fg">{resume.education.institution}</div>
+          <div className="text-sm text-fg-muted mt-0.5">{resume.education.degree}</div>
+          <div className="flex items-center gap-4 mt-2">
+            <span className="text-xs text-fg-subtle">{resume.education.period}</span>
+            <span className="text-xs font-semibold text-mint">CGPA {resume.education.cgpa}</span>
           </div>
         </motion.div>
       </div>
