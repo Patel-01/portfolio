@@ -21,6 +21,8 @@ export function WorkspaceBanner() {
         <img
           src={`${import.meta.env.BASE_URL}images/workspace.png`}
           alt="Developer workspace"
+          width={1200}
+          height={900}
           className="w-full h-full object-cover"
           style={{ objectPosition: 'center 25%' }}
           loading="lazy"

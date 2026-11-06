@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { resume } from '../data/resume'
+import { RevealHeading, ScrollReadText } from './cinematic'
 
 const traits = [
   {
@@ -32,13 +33,17 @@ export function About() {
             viewport={{ once: true, margin: '-5%' }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="text-violet text-sm font-semibold mb-3 block tracking-wide">About</span>
-            <h2 className="text-4xl font-bold text-fg mb-5 leading-tight">
+            <span className="text-violet text-[13px] font-bold mb-3 block tracking-wide uppercase">About</span>
+            <RevealHeading
+              weight={700}
+              className="text-4xl font-bold text-fg mb-5 leading-tight"
+            >
               Building software that ships and scales.
-            </h2>
-            <p className="text-fg-muted leading-relaxed mb-12">
-              {resume.aboutBio}
-            </p>
+            </RevealHeading>
+            <ScrollReadText
+              text={resume.aboutBio}
+              className="text-fg-muted leading-relaxed mb-12"
+            />
 
             {/* Editorial trait list */}
             <div className="flex flex-col divide-y divide-border">
@@ -51,7 +56,7 @@ export function About() {
                   transition={{ duration: 0.35, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   className="py-5 group flex gap-5 items-start"
                 >
-                  <span className="text-violet text-xs font-mono mt-0.5 w-6 flex-shrink-0 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <span className="text-violet text-sm font-mono mt-0.5 w-6 flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
                     {t.num}
                   </span>
                   <div>
@@ -82,6 +87,8 @@ export function About() {
               <img
                 src={`${import.meta.env.BASE_URL}images/workspace.png`}
                 alt="Pankaj's workspace"
+                width={800}
+                height={600}
                 className="w-full object-cover"
                 style={{ aspectRatio: '4/3', objectPosition: 'center top' }}
                 loading="lazy"

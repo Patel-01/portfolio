@@ -82,13 +82,19 @@ body {
 
 /* Section spacing */
 .section {
-  padding: 7rem 0;
+  padding: 5rem 0;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 4rem 0;
+    padding: 3.5rem 0;
   }
+}
+
+/* Focus ring for clickable glass cards */
+.glass-card:focus-visible {
+  outline: 2px solid rgba(110, 85, 255, 0.5);
+  outline-offset: 0;
 }
 
 /* Ambient glow blobs */

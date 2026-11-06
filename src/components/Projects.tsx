@@ -1,13 +1,43 @@
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink, GitPullRequest } from 'lucide-react'
 import { resume } from '../data/resume'
+import { RevealHeading, ScrambleText } from './cinematic'
+
+function ProjectLogoTile({ src, name, color }: { src: string | null; name: string; color: string }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div
+      className="w-7 h-7 rounded-md flex-shrink-0 flex items-center justify-center overflow-hidden border border-border"
+      style={{ background: `${color}18` }}
+    >
+      {src && !failed ? (
+        <img
+          src={src}
+          alt={`${name} logo`}
+          className="w-5 h-5 object-contain"
+          onError={() => setFailed(true)}
+          loading="lazy"
+          width={20}
+          height={20}
+        />
+      ) : (
+        <span className="text-xs font-bold leading-none select-none" style={{ color }}>{name[0]}</span>
+      )}
+    </div>
+  )
+}
 
 const typeColors: Record<string, string> = {
   'AI': '#6E55FF',
+  'AI Platform': '#6E55FF',
+  'AI + Mobile': '#42F5C8',
   'Marketplace': '#42F5C8',
   'Open Source': '#FBBF24',
   'Mobile': '#F472B6',
+  'Consumer': '#F97316',
+  'HealthTech': '#38BDF8',
+  'Contract': '#FBBF24',
 }
 
 function use3DTilt() {
@@ -35,76 +65,80 @@ function use3DTilt() {
 function ProjectCard({
   project,
   index,
+  total,
 }: {
   project: (typeof resume.projects)[number]
   index: number
+  total: number
 }) {
   const { ref, onMove, onLeave } = use3DTilt()
   const isLinked = !!project.link
+  const isOrphan = total % 3 === 1 && index === total - 1
 
-  const cardClassName = `glass-card p-6 flex flex-col gap-4 h-full select-none transition-all duration-200
-    hover:border-violet/20 hover:-translate-y-0.5 ${isLinked ? 'cursor-pointer' : 'cursor-default'}`
+  const cardClassName = `glass-card p-6 flex flex-col h-full select-none transition-all duration-150
+    hover:border-violet/40 hover:-translate-y-0.5 hover:bg-white/[0.02]
+    focus-visible:border-violet/40 focus-visible:bg-white/[0.02] focus-visible:outline-none focus-visible:-translate-y-0.5
+    ${isLinked ? 'cursor-pointer' : 'cursor-default'}`
   const cardStyle: React.CSSProperties = { transformStyle: 'preserve-3d', willChange: 'transform' }
+
+  const tagColor = typeColors[project.type] ?? '#6E55FF'
 
   const inner = (
     <>
-      {/* Top */}
+      {/* Top row: type tag + link icon */}
       <div className="flex items-start justify-between gap-2">
-        {(() => {
-          const tagColor = typeColors[project.type] ?? '#6E55FF'
-          return (
-            <div
-              className="text-xs font-semibold px-2 py-1 rounded-full"
-              style={{ background: `${tagColor}18`, color: tagColor }}
-            >
-              {project.type}
-            </div>
-          )
-        })()}
-        <div className="flex gap-1 items-center">
-          {project.prs !== null && (
-            <span className="flex items-center gap-1 text-xs text-fg-muted mr-1">
-              <GitPullRequest size={11} style={{ color: project.color }} />
-              {project.prs}
-            </span>
-          )}
-          {/* When card is a link, show icon as visual indicator only (no nested <a>) */}
-          {project.link && (
-            <span className="text-fg-muted p-1.5 -m-1.5" aria-hidden="true">
-              <ExternalLink size={14} />
-            </span>
-          )}
+        <div
+          className="text-xs font-semibold px-2 py-1 rounded-full"
+          style={{ background: `${tagColor}18`, color: tagColor }}
+        >
+          {project.type}
+        </div>
+        {project.link && (
+          <span className="text-fg-muted p-1.5 -m-1.5" aria-hidden="true">
+            <ExternalLink size={14} />
+          </span>
+        )}
+      </div>
+
+      {/* Title row: logo + title + subtitle */}
+      <div className="flex items-start gap-3 mt-2">
+        <ProjectLogoTile
+          src={project.logo ? `${import.meta.env.BASE_URL}${project.logo}` : null}
+          name={project.title}
+          color={project.color}
+        />
+        <div className="min-w-0">
+          <h3 className="font-bold text-fg text-lg leading-tight">
+            <ScrambleText text={project.title} trigger="hover" />
+          </h3>
+          <p className="text-fg-muted text-sm mt-0.5">{project.subtitle}</p>
         </div>
       </div>
 
-      {/* Title */}
-      <div>
-        <div
-          className="w-8 h-0.5 rounded-full mb-3 transition-all duration-300"
-          style={{ background: project.color }}
-        />
-        <h3 className="font-bold text-fg text-lg leading-tight">{project.title}</h3>
-        <p className="text-fg-muted text-sm mt-0.5">{project.subtitle}</p>
-      </div>
-
       {/* Body */}
-      <p className="text-fg-muted text-sm leading-relaxed flex-1">{project.description}</p>
+      <p className="text-fg-muted text-sm leading-relaxed flex-1 mt-1">{project.description}</p>
 
-      {/* Contribution */}
-      <p className="text-xs text-fg-subtle leading-relaxed italic border-t border-border pt-3">
-        {project.contribution}
-      </p>
-
-      {/* Stack */}
-      <div className="flex flex-wrap gap-1.5">
-        {project.stack.map(s => (
-          <span
-            key={s}
-            className="text-xs px-2 py-0.5 rounded-md border border-border text-fg-muted"
-          >
-            {s}
+      {/* Footer: pinned to bottom */}
+      <div className="mt-auto pt-3 border-t border-border flex flex-col gap-3">
+        <p className="text-xs text-fg-muted leading-relaxed italic">
+          {project.contribution}
+        </p>
+        {project.prs !== null && (
+          <span className="flex items-center gap-1 text-xs text-fg-muted">
+            <GitPullRequest size={11} style={{ color: project.color }} />
+            {project.prs} PRs
           </span>
-        ))}
+        )}
+        <div className="flex flex-wrap gap-1.5">
+          {project.stack.map(s => (
+            <span
+              key={s}
+              className="text-xs px-2 py-0.5 rounded-md border border-border text-fg-muted"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
       </div>
     </>
   )
@@ -115,6 +149,7 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-5%' }}
       transition={{ duration: 0.35, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      className={isOrphan ? 'sm:col-span-2 lg:col-span-3' : ''}
     >
       {isLinked ? (
         <a
@@ -156,13 +191,15 @@ export function Projects() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12"
         >
-          <span className="text-violet text-sm font-semibold mb-3 block">Projects</span>
-          <h2 className="text-4xl font-bold text-fg leading-tight">Things I've built.</h2>
+          <span className="text-violet text-[13px] font-bold mb-3 block tracking-wide uppercase">Projects</span>
+          <RevealHeading weight={700} className="text-4xl font-bold text-fg leading-tight">
+            Things I've built.
+          </RevealHeading>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {resume.projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
+            <ProjectCard key={project.title} project={project} index={i} total={resume.projects.length} />
           ))}
         </div>
       </div>

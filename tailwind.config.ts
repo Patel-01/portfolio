@@ -16,6 +16,7 @@ export default {
         },
         violet: {
           DEFAULT: '#6E55FF',
+          label: '#8B7BFF',
           dim: 'rgba(110,85,255,0.15)',
           border: 'rgba(110,85,255,0.3)',
         },

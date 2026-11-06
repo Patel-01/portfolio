@@ -25,4 +25,10 @@ Single-page React portfolio deployed to GitHub Pages at `/portfolio/` (set in `v
 
 **Animations:** Framer Motion throughout. The root `MotionConfig` in `App.tsx` has `reducedMotion="user"`, so all animations respect the OS preference automatically.
 
-**Images/assets:** Public assets are under `public/`. Due to the GitHub Pages base path, reference them as `/portfolio/<filename>` in production or use Vite's `import` for processed assets.
+**Images/assets:** Public assets are under `public/`. Due to the GitHub Pages base path, reference them as `/portfolio/<filename>` in components and HTML. Exception: logo paths in `resume.ts` are stored as bare relative paths (e.g. `images/logos/operate.png`) and are prefixed with `/portfolio/` at the component render site — keep that convention when adding logos.
+
+**Extended Tailwind tokens:** Beyond the base palette, components use sub-tokens like `violet-label`, `violet-dim`, `violet-border`, `mint-dim`, `mint-border` — all defined in `tailwind.config.ts`. Prefer these over arbitrary opacity modifiers.
+
+**Type-color mapping:** `Projects.tsx` has a local `typeColors` record mapping project `type` strings to hex values. When adding a new type to a project or experience entry in `resume.ts`, add the matching color entry there too.
+
+**Loader:** The splash `Loader` in `App.tsx` is skipped on repeat visits (keyed on `sessionStorage`). To re-test it during dev, clear sessionStorage in DevTools or open a fresh private window.

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { resume } from '../data/resume'
+import { RevealHeading } from './cinematic'
 
 const categoryColors: Record<string, string> = {
   'Frontend': '#6E55FF',
@@ -24,13 +25,13 @@ export function Skills() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12"
         >
-          <span className="text-violet text-sm font-semibold mb-3 block">Skills</span>
-          <h2 className="text-4xl font-bold text-fg leading-tight">
+          <span className="text-violet text-[13px] font-bold mb-3 block tracking-wide uppercase">Skills</span>
+          <RevealHeading weight={700} className="text-4xl font-bold text-fg leading-tight">
             The stack.
-          </h2>
+          </RevealHeading>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
           {categories.map(([category, skills], i) => {
             const color = categoryColors[category] ?? '#6E55FF'
             return (
@@ -81,25 +82,23 @@ export function Skills() {
           })}
         </div>
 
-        {/* Certifications */}
+        {/* Certifications — inline, no card */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-5%' }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 glass-card p-5"
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 flex flex-wrap items-center gap-2"
         >
-          <span className="font-semibold text-sm text-fg mb-4 block">Certifications & Badges</span>
-          <div className="flex flex-wrap gap-2">
-            {resume.certifications.map(cert => (
-              <span
-                key={cert}
-                className="text-xs font-medium px-3 py-1 rounded-full border border-mint/25 bg-mint/8 text-mint"
-              >
-                {cert}
-              </span>
-            ))}
-          </div>
+          <span className="text-xs text-fg-subtle font-medium mr-1">Badges:</span>
+          {resume.certifications.map(cert => (
+            <span
+              key={cert}
+              className="text-xs font-medium px-3 py-1 rounded-full border border-mint/25 bg-mint/8 text-mint"
+            >
+              {cert}
+            </span>
+          ))}
         </motion.div>
       </div>
     </section>

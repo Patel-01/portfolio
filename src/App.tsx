@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
-import { Cursor } from './components/Cursor'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { Stats } from './components/Stats'
@@ -11,6 +10,7 @@ import { Projects } from './components/Projects'
 import { Skills } from './components/Skills'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { VelocityMarquee } from './components/cinematic'
 
 function Loader({ onDone }: { onDone: () => void }) {
   useEffect(() => {
@@ -81,7 +81,6 @@ export default function App() {
         aria-hidden
       />
 
-      <Cursor />
       <AnimatePresence>{!loaded && <Loader onDone={() => setLoaded(true)} />}</AnimatePresence>
 
       <motion.div
@@ -93,6 +92,7 @@ export default function App() {
         <main id="main-content">
           <Hero />
           <Stats />
+          <VelocityMarquee />
           <About />
           <WorkspaceBanner />
           <Experience />

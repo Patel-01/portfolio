@@ -40,10 +40,19 @@ export function Cursor() {
     document.addEventListener('mouseleave', onDocLeave)
     document.addEventListener('mouseenter', onDocEnter)
 
+    // Hide ring while scrolling so it doesn't sit on stale positions
+    let scrollTimer: ReturnType<typeof setTimeout>
+    const onScroll = () => {
+      ring.style.opacity = '0'
+      clearTimeout(scrollTimer)
+      scrollTimer = setTimeout(() => { ring.style.opacity = '1' }, 150)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+
     const tick = () => {
       dot.style.transform = `translate(${posRef.current.x - 4}px, ${posRef.current.y - 4}px)`
-      ringPos.current.x += (posRef.current.x - ringPos.current.x) * 0.12
-      ringPos.current.y += (posRef.current.y - ringPos.current.y) * 0.12
+      ringPos.current.x += (posRef.current.x - ringPos.current.x) * 0.35
+      ringPos.current.y += (posRef.current.y - ringPos.current.y) * 0.35
       ring.style.transform = `translate(${ringPos.current.x - 20}px, ${ringPos.current.y - 20}px)`
       rafRef.current = requestAnimationFrame(tick)
     }
@@ -51,9 +60,11 @@ export function Cursor() {
 
     return () => {
       window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('scroll', onScroll)
       document.removeEventListener('mouseleave', onDocLeave)
       document.removeEventListener('mouseenter', onDocEnter)
       cancelAnimationFrame(rafRef.current)
+      clearTimeout(scrollTimer)
     }
   }, [])
 

@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Mail, Github, Linkedin, ArrowRight } from 'lucide-react'
 import { resume } from '../data/resume'
+import { RevealHeading } from './cinematic'
 
 const links = [
   { icon: Mail, label: 'Email', value: resume.email, href: `mailto:${resume.email}` },
@@ -27,6 +28,8 @@ export function Contact() {
             src={`${import.meta.env.BASE_URL}images/outdoor.png`}
             alt=""
             aria-hidden
+            width={1200}
+            height={800}
             className="w-full h-full object-cover"
             style={{ objectPosition: '50% 30%' }}
             loading="lazy"
@@ -52,11 +55,13 @@ export function Contact() {
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="text-center mb-14"
           >
-            <span className="text-violet text-sm font-semibold mb-3 block">Contact</span>
-            <h2 className="text-5xl font-black text-fg leading-tight mb-4">
-              Let's build<br />
-              <span className="grad-text">something great.</span>
-            </h2>
+            <span className="text-violet text-[13px] font-bold mb-3 block tracking-wide uppercase">Contact</span>
+            <RevealHeading as="h2" srText="Let's build something great." weight={900} className="text-fg text-5xl font-black leading-none">
+              Let's build
+            </RevealHeading>
+            <RevealHeading as="p" weight={900} gradient className="text-5xl font-black leading-tight mb-4">
+              something great.
+            </RevealHeading>
             <p className="text-fg-muted max-w-md mx-auto leading-relaxed">
               Open to full-time roles, freelance, and interesting engineering collaborations.
             </p>
@@ -104,7 +109,7 @@ export function Contact() {
                 </div>
                 <div className="min-w-0">
                   <div className="text-xs text-fg-muted font-medium">{label}</div>
-                  <div className="text-sm text-fg font-medium break-words">{value}</div>
+                  <div className="text-sm text-fg font-medium truncate" title={value}>{value}</div>
                 </div>
               </a>
             ))}

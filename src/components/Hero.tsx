@@ -9,14 +9,15 @@ import {
 import { ArrowDown, Github, Linkedin, FileText } from 'lucide-react'
 import { resume } from '../data/resume'
 import { ParticleCanvas } from './ParticleCanvas'
+import { KineticHeadline } from './cinematic'
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.4 } },
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
 }
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 }
 
 export function Hero() {
@@ -119,13 +120,16 @@ export function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={fadeUp}
-              className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none mb-6"
-            >
-              <span className="grad-text block">I build AI &</span>
-              <span className="text-fg block">mobile products.</span>
-            </motion.h1>
+            <motion.div variants={fadeUp} className="mb-6">
+              <KineticHeadline
+                as="h1"
+                lines={[
+                  { text: 'I build AI &', gradient: true },
+                  { text: 'mobile products.', gradient: false },
+                ]}
+                className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none"
+              />
+            </motion.div>
 
             <motion.p
               variants={fadeUp}
@@ -188,7 +192,7 @@ export function Hero() {
                 <span>LinkedIn</span>
               </a>
               <span className="hidden sm:inline w-px h-3.5 bg-border mx-1" />
-              <span className="hidden sm:inline text-fg-subtle text-sm px-2">{resume.location}</span>
+              <span className="hidden sm:inline text-fg-muted text-sm px-2">{resume.location}</span>
             </motion.div>
           </motion.div>
 
@@ -222,7 +226,6 @@ export function Hero() {
                   height={480}
                   className="w-full h-full object-cover object-top"
                   loading="eager"
-                  fetchPriority="high"
                 />
                 <div
                   className="absolute inset-0 pointer-events-none"

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, Linkedin, Menu, X, FileText } from 'lucide-react'
 import { resume } from '../data/resume'
+import { RollText } from './cinematic'
 
 const links = [
   { label: 'Work', href: '#projects' },
@@ -36,7 +37,7 @@ export function Nav() {
           if (entry.isIntersecting) setActiveSection(entry.target.id)
         })
       },
-      { rootMargin: '-20% 0% -60% 0%', threshold: 0 }
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
     )
     sections.forEach(s => obs.observe(s))
     return () => obs.disconnect()
@@ -72,7 +73,7 @@ export function Nav() {
                   isActive ? 'text-fg' : 'text-fg-muted hover:text-fg'
                 }`}
               >
-                {l.label}
+                <RollText>{l.label}</RollText>
                 {isActive && (
                   <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-violet rounded-full" />
                 )}
@@ -116,7 +117,7 @@ export function Nav() {
             href={`mailto:${resume.email}`}
             className="px-4 py-2 rounded-lg bg-violet text-white text-sm font-semibold hover:bg-violet/90 transition-colors"
           >
-            Hire me
+            <RollText>Hire me</RollText>
           </a>
         </div>
 
