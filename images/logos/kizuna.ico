@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<meta name="robots" content="index, follow" />
+		<title>Kizuna Care &mdash; Coming Soon</title>
+					<meta name="description" content="Signup to be the first to know when we launch." />
+				<script src="https://kizunacare.com/wp-includes/js/jquery/jquery.js"></script>
+		<style type="text/css">* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    color: black;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+#wrap {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    margin: auto 5%;
+    padding: 0;
+    text-align: center;
+    max-width: 420px;
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    text-align: center;
+}
+
+.btn {
+    background: black;
+    background-image: none;
+    border: 1px solid black;
+    box-shadow: none;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 10px;
+    padding: 6px 30px;
+    text-align: center;
+    text-decoration: none;
+    touch-action: manipulation;
+    transition: all 0.2s ease;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.status-message {
+    display: none;
+    margin-bottom: 20px;
+}
+
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 2rem 3rem;
+    width: 100%;
+}
+
+header .login-prompt{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ADC9ED;
+    font-size: .9rem;
+    display:flex;
+    align-items: center;
+    text-wrap: nowrap;
+}
+
+header .login-prompt,
+header .login-prompt a {
+    display:flex;
+    align-items: center;
+    gap: 5px;
+}
+
+header .login-prompt .login-link {
+    color: #336AD7;
+    text-decoration:none;
+}
+
+header .login-prompt .login-link .nfd-login-icon {
+    display:flex;
+}
+
+header .login-prompt .login-link .nfd-login-icon svg {
+    width: 20px;
+}
+
+.subscription_widget {
+    margin-block: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.subscription_widget img,
+.subscription_widget svg {
+    max-height: 80px;
+    max-width: 500px;
+}
+
+.subscription-field-wrapper{
+    flex:1;
+}
+.subscription-field-wrapper #subscribe-field{
+    width: 100%;
+}
+
+@media (max-width: 360px) {
+
+    header .login-label {
+        display : none;
+    }
+}</style>
+		<link rel="canonical" href="https://kizunacare.com">
+					<link rel="stylesheet" href="https://kizunacare.com/wp-content/plugins/bluehost-wordpress-plugin/assets/styles/coming-soon.css?v=5.0.0" />
+		
+		<!-- Structured data JSON-LD -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"url": "https://kizunacare.com",
+				"name": "Kizuna Care &mdash; Coming Soon",
+				"description": "Signup to be the first to know when we launch."
+			}
+		</script>
+
+		<!-- Open Graph -->
+		<meta property="og:title" content="Kizuna Care &mdash; Coming Soon">
+		<meta property="og:description" content="Signup to be the first to know when we launch.">
+		<meta property="og:url" content="https://kizunacare.com">
+		<meta property="og:type" content="website">
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content="Kizuna Care &mdash; Coming Soon">
+		<meta name="twitter:description" content="Signup to be the first to know when we launch.">
+
+	</head>
+	<body>
+	<header>
+		<div class="login-prompt">
+			<span class="login-label">
+				Is this your website?			</span>
+			<a href="https://kizunacare.com/wp-login.php" class="login-link" aria-label="Login to WordPress>">
+				<span class="nfd-login-icon">
+					<svg fill="none" stroke-width="1.5" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"></path></svg>				</span>
+				Login to WordPress			</a>
+		</div>
+	</header>
+		<div id="wrap">
+			<main class="content">
+								<div class="subscription_widget">
+					<span><img src="https://kizunacare.com/wp-content/uploads/2024/12/kizuna.svg" alt="Kizuna Care Logo"></span>
+					<h1>Kizuna Care</h1>
+																								</div>
+							</main>
+		</div>
+		<footer>
+							<p class="comingsoon-backlinks"><svg viewbox="0 0 116.8 19.3" xmlns="http://www.w3.org/2000/svg"><g fill="#3575d3"><path d="m0 0h5.3v5.3h-5.3zm6.8 0h5.3v5.3h-5.3zm6.9 0h5.3v5.3h-5.3zm-13.7 6.8h5.3v5.3h-5.3zm6.8 0h5.3v5.3h-5.3zm6.9 0h5.3v5.3h-5.3zm-13.7 6.9h5.3v5.3h-5.3zm6.8 0h5.3v5.3h-5.3z" /><path d="m13.7 13.7h5.3v5.3h-5.3z" /><path d="m29.8 8.2c1.1-1 2.5-1.5 4-1.5 2.7 0 5.3 1.8 5.3 6.3s-2.9 6.3-6.1 6.3c-1.6 0-3.2-.4-4.6-1.3v-18h1.4zm0 9.1c1 .5 2.1.8 3.2.8 2.5 0 4.8-1.5 4.8-5.1 0-3.2-1.8-5.1-4.1-5.1-1.5.1-2.9.8-3.9 1.9zm11.7 1.7v-19h1.3v19zm5.8-4.7c0 2.9 1.4 3.7 2.8 3.7 1.8-.1 3.3-1.1 4.2-2.7v-8.4h1.4v12.2h-1.4v-2.4c-1 1.5-2.8 2.5-4.6 2.5-1.9 0-3.8-1.1-3.8-4.8v-7.5h1.4zm21.4 3.9c-1.3.7-2.8 1.1-4.3 1-4.1-.1-6.2-3.4-6.1-6.8 0-3.2 2.5-5.8 5.6-5.8h.4c3.3.1 5.5 2.7 5.1 6.6h-9.8c0 2.6 2.1 4.7 4.7 4.8h.1c1.3 0 2.6-.3 3.8-.9zm-.5-6.1c.1-2.2-1.6-4.1-3.8-4.2h-.2c-2.4-.1-4.4 1.8-4.5 4.2zm5.6-2.9c1-1.6 2.6-2.5 4.5-2.6 2.4 0 3.9 1.8 3.9 4.6v7.8h-1.3v-7.6c0-2.6-1.4-3.6-2.8-3.6-1.8.2-3.3 1.2-4.2 2.7v8.5h-1.3v-19h1.4c-.2 0-.2 9.2-.2 9.2zm22.3 3.7c0 4-2.7 6.3-5.9 6.3-3.5 0-5.9-2.8-5.9-6.3-.2-3.3 2.3-6.1 5.6-6.3h.3c3.2.1 5.9 2.4 5.9 6.3zm-10.3 0c0 2.7 1.6 5 4.5 5s4.5-2.4 4.5-5-1.7-5-4.5-5-4.5 2.3-4.5 5zm13.4 4c1 .6 2.1 1 3.2 1 1.3 0 2.9-.5 2.8-1.8 0-1.1-1.2-2-3-2.7-2.1-.8-3.9-1.6-3.9-3.5s1.8-3.3 4.2-3.3c1.2 0 2.3.3 3.4.9l-.5 1.1c-.9-.5-1.8-.7-2.8-.7-2 0-2.9 1-2.9 2 0 1.3 1.5 1.8 3.4 2.6 2.9 1.1 3.6 2.5 3.6 3.6 0 1.9-1.8 3.1-4.2 3.1-1.4 0-2.7-.4-3.9-1.1zm16.4-10v1.1h-4v6.7c0 2 .8 3.2 2.6 3.3.8 0 1.6-.1 2.3-.5l.4 1.2c-.9.3-1.8.5-2.7.5-2.2 0-3.9-1.3-3.9-4.5v-6.7h-2.3v-1.1h2.2v-4.1h1.4v4.1z" /></g></svg>
+					<span class="text-center"><a target="_blank" href="https://www.bluehost.com/wordpress?channelid=P99C100S1N0B3003A151D115E0000V112&amp;utm_medium=bluehost_plugin&amp;utm_source=coming-soon-template" class="bluehost">Powered by Bluehost</a></span>
+                    <span class="text-center"><b>Need a domain?</b><br>Check out our <a href="https://www.bluehost.com/domains?channelid=P99C100S1N0B3003A151D115E0000V112&amp;utm_medium=bluehost_plugin&amp;utm_source=coming-soon-template">Domain Registration</a> options.</span></p>
+								</footer>
+	</body>
+</html>
