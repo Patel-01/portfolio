@@ -9,7 +9,7 @@ import {
 import { ArrowDown, Github, Linkedin, FileText } from 'lucide-react'
 import { resume } from '../data/resume'
 import { ParticleCanvas } from './ParticleCanvas'
-import { KineticHeadline } from './cinematic'
+import { KineticHeadline, HeroVoices } from './cinematic'
 
 const stagger = {
   hidden: {},
@@ -19,6 +19,13 @@ const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 }
+
+const HERO_VOICES = [
+  { name: 'Balwant Singh',   role: 'Tech Lead',        fragment: 'a rare blend of technical depth and strong ownership', photo: 'images/testimonials/balwant.jpg' },
+  { name: 'Karthik Narayan', role: 'Senior TPM',       fragment: 'delivered high-quality work with minimal oversight',   photo: 'images/testimonials/karthik.jpg' },
+  { name: 'Naveen Kumar',    role: 'his manager',       fragment: 'quickly learnt the ins and outs of the codebase',     photo: 'images/testimonials/naveen.jpg' },
+  { name: 'Visakh Vijayan',  role: 'Senior colleague',  fragment: 'Very disciplined and hardworking',                    photo: 'images/testimonials/visakh.jpg' },
+]
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -167,6 +174,10 @@ export function Hero() {
                   Résumé
                 </a>
               )}
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="mb-8">
+              <HeroVoices items={HERO_VOICES} total={resume.testimonials.length} photoBase={import.meta.env.BASE_URL} />
             </motion.div>
 
             <motion.div variants={fadeUp} className="flex items-center gap-1">
