@@ -4,15 +4,27 @@ import { Linkedin, Quote } from 'lucide-react'
 import { resume } from '../data/resume'
 import { RevealHeading } from './cinematic'
 
-function Avatar({ initials, color }: { initials: string; color: string }) {
+function Avatar({ initials, color, photo }: { initials: string; color: string; photo?: string }) {
+  if (photo) {
+    return (
+      <img
+        src={`/portfolio/${photo}`}
+        alt={initials}
+        className="w-12 h-12 rounded-full flex-shrink-0 object-cover"
+        style={{ border: `2px solid ${color}40` }}
+        onError={(e) => {
+          const target = e.currentTarget
+          target.style.display = 'none'
+          const fallback = target.nextElementSibling as HTMLElement | null
+          if (fallback) fallback.style.display = 'flex'
+        }}
+      />
+    )
+  }
   return (
     <div
       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm select-none"
-      style={{
-        background: `${color}20`,
-        border: `2px solid ${color}40`,
-        color,
-      }}
+      style={{ background: `${color}20`, border: `2px solid ${color}40`, color }}
     >
       {initials}
     </div>
@@ -58,7 +70,7 @@ function TestimonialCard({
 
         {/* Person */}
         <div className="flex items-center gap-3 pt-3 border-t border-border">
-          <Avatar initials={t.initials} color={t.color} />
+          <Avatar initials={t.initials} color={t.color} photo={t.photo} />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <span className="text-fg font-semibold text-sm truncate">{t.name}</span>
