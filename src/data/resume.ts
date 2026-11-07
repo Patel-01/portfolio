@@ -34,7 +34,7 @@ export const resume = {
         'Shipped AI context-window panel surfacing relevant logs and metrics per incident',
       ],
       stack: ['React', 'TypeScript', 'Python', 'Flask', 'Claude Code', 'OAuth', 'AWS'],
-      highlight: 'surfacing relevant logs and metrics per incident' as string | null,
+      highlight: 'Built AWS CloudWatch log-provider' as string | null,
     },
     {
       company: 'Hi5Talent — Recco',
@@ -70,7 +70,7 @@ export const resume = {
         'Collaborated on design-to-code implementation',
       ],
       stack: ['React Native', 'TypeScript', 'Expo'],
-      highlight: 'Built core mobile features, navigation flows, and API integrations' as string | null,
+      highlight: 'core mobile features, navigation flows' as string | null,
     },
     {
       company: 'Sunny Energy — My Solar RX',

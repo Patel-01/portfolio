@@ -1,4 +1,15 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
+
+function useNarrow() {
+  const [narrow, setNarrow] = useState(() => typeof window !== 'undefined' && matchMedia('(max-width: 399px)').matches)
+  useEffect(() => {
+    const m = matchMedia('(max-width: 399px)')
+    const on = () => setNarrow(m.matches)
+    m.addEventListener('change', on)
+    return () => m.removeEventListener('change', on)
+  }, [])
+  return narrow
+}
 import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { resume } from '../data/resume'
@@ -19,7 +30,7 @@ function DigitSpin({ digit, delay }: { digit: number; delay: number }) {
   return (
     <span
       ref={ref}
-      style={{ display: 'inline-block', overflow: 'hidden', height: '1em', verticalAlign: 'top', fontVariantNumeric: 'tabular-nums' }}
+      style={{ display: 'inline-block', overflow: 'hidden', height: '1em', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}
     >
       <motion.span
         style={{ display: 'flex', flexDirection: 'column' }}
@@ -43,7 +54,7 @@ function DateReel({ value, reduce, className }: { value: string; reduce: boolean
   return (
     <span className={className}>
       <span style={srOnly}>{value}</span>
-      <span aria-hidden>
+      <span aria-hidden style={{ lineHeight: 1 }}>
         {chars.map((c, i) => {
           if (/\d/.test(c)) {
             const idx = di++
@@ -149,9 +160,10 @@ interface RoleItemProps {
   isOpen: boolean
   onToggle: () => void
   reduce: boolean
+  narrow: boolean
 }
 
-function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: RoleItemProps) {
+function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce, narrow }: RoleItemProps) {
   const bodyId = `exp-body-${index}`
   const headerId = `exp-header-${index}`
 
@@ -187,7 +199,7 @@ function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: Ro
   }
 
   const panelContent = (
-    <div className="px-5 md:px-6 pb-6 border-t border-border pt-4">
+    <div className={`border-t border-border pt-4 ${narrow ? 'px-4 pb-5' : 'px-5 md:px-6 pb-6'}`}>
       <p className="text-fg-muted text-sm leading-relaxed mb-4">{exp.summary}</p>
       <ul className="space-y-2 mb-4">
         {exp.bullets.map((b, bi) => (
@@ -212,7 +224,7 @@ function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: Ro
       {/* Timeline dot ─── aria-hidden, decorative */}
       <div
         aria-hidden
-        style={{ position: 'absolute', left: -35, top: 20, width: 8, height: 8, zIndex: 1 }}
+        style={{ position: 'absolute', left: narrow ? -21 : -35, top: 20, width: 8, height: 8, zIndex: 1 }}
       >
         {/* Dim ring */}
         <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '1.5px solid rgba(232,231,255,.22)' }} />
@@ -237,7 +249,7 @@ function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: Ro
           animate={{ scale: [1, 1.75, 1], opacity: [0.75, 0, 0.75] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{
-            position: 'absolute', left: -35, top: 20,
+            position: 'absolute', left: narrow ? -21 : -35, top: 20,
             width: 8, height: 8, borderRadius: '50%',
             border: '1.5px solid rgba(66,245,200,.7)',
             pointerEvents: 'none', zIndex: 2,
@@ -253,10 +265,10 @@ function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: Ro
         <button
           ref={headerRef}
           id={headerId}
-          className="w-full flex items-start justify-between gap-4 p-5 md:p-6 text-left min-h-[64px]"
+          className={`w-full flex items-start justify-between gap-4 text-left min-h-[64px] ${narrow ? 'p-4' : 'p-5 md:p-6'}`}
           onClick={onToggle}
           aria-expanded={isOpen}
-          aria-controls={bodyId}
+          aria-controls={isOpen ? bodyId : undefined}
         >
           <div className="flex items-start gap-4 min-w-0">
             <LogoTile
@@ -319,6 +331,7 @@ function RoleItem({ exp, index, n, spineProgress, isOpen, onToggle, reduce }: Ro
 
 export function Experience() {
   const reduce = useReducedMotion()
+  const narrow = useNarrow()
   const [openSet, setOpenSet] = useState<Set<number>>(new Set([0, 1]))
   const listRef = useRef<HTMLOListElement>(null)
 
@@ -354,12 +367,12 @@ export function Experience() {
         </motion.div>
 
         {/* Spine + roles */}
-        <div style={{ position: 'relative', paddingLeft: 32 }}>
+        <div style={{ position: 'relative', paddingLeft: narrow ? 28 : 32 }}>
 
           {/* Spine track (decorative) */}
           <div
             aria-hidden
-            style={{ position: 'absolute', left: 0, top: 20, bottom: 20, width: 2, background: 'rgba(232,231,255,.08)' }}
+            style={{ position: 'absolute', left: narrow ? 10 : 0, top: 20, bottom: 20, width: 2, background: 'rgba(232,231,255,.08)' }}
           >
             <motion.div
               style={{
@@ -383,6 +396,7 @@ export function Experience() {
                 isOpen={openSet.has(i)}
                 onToggle={() => toggle(i)}
                 reduce={!!reduce}
+                narrow={narrow}
               />
             ))}
           </ol>
