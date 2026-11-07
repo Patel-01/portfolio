@@ -34,6 +34,7 @@ export const resume = {
         'Shipped AI context-window panel surfacing relevant logs and metrics per incident',
       ],
       stack: ['React', 'TypeScript', 'Python', 'Flask', 'Claude Code', 'OAuth', 'AWS'],
+      highlight: 'surfacing relevant logs and metrics per incident' as string | null,
     },
     {
       company: 'Hi5Talent — Recco',
@@ -52,6 +53,7 @@ export const resume = {
         '342 merged PRs and 362 PR reviews',
       ],
       stack: ['React Native', 'Node.js', 'TypeScript', 'Stripe Connect', 'OpenAI', 'Gemini', 'MongoDB', 'Redis'],
+      highlight: 'MVP live in 3 months, iterated to full iOS/Android release over 15 months' as string | null,
     },
     {
       company: 'Artica',
@@ -68,6 +70,7 @@ export const resume = {
         'Collaborated on design-to-code implementation',
       ],
       stack: ['React Native', 'TypeScript', 'Expo'],
+      highlight: 'Built core mobile features, navigation flows, and API integrations' as string | null,
     },
     {
       company: 'Sunny Energy — My Solar RX',
@@ -85,6 +88,7 @@ export const resume = {
         '16 PRs merged in 3 weeks',
       ],
       stack: ['Python', 'TypeScript', 'React Native', 'Redis', 'React 19', 'BullMQ'],
+      highlight: '16 PRs merged in 3 weeks' as string | null,
     },
     {
       company: 'Pinch',
@@ -101,6 +105,7 @@ export const resume = {
         'Maintained cross-platform iOS/Android consistency and TypeScript type safety',
       ],
       stack: ['React Native', 'TypeScript', 'Expo'],
+      highlight: 'household intelligence, proactive engine, and task management flows' as string | null,
     },
     {
       company: 'Kizuna Care',
@@ -117,6 +122,7 @@ export const resume = {
         'Maintained TypeScript type safety across iOS and Android targets',
       ],
       stack: ['React Native', 'TypeScript', 'Expo'],
+      highlight: 'caregiver profile, booking, and care coordination flows' as string | null,
     },
   ],
 
